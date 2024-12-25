@@ -1,0 +1,101 @@
+<div class="modal" *ngIf="isOpen">
+  <div class="modal-content">
+    <span class="close" (click)="closeModal()">&times;</span>
+    <div class="form-container">
+      <h2>{{ selectedEstudiante ? 'Editar estudiante' : 'Agregar nuevo estudiante' }}</h2>
+      <form (ngSubmit)="saveEstudiante()">
+        <div>
+          <label for="codigo">Código</label>
+          <input
+            type="number"
+            id="codigo"
+            [(ngModel)]="estudiante.codigo"
+            name="codigo"
+            [disabled]="true"
+            required
+          />
+        </div>
+        <div>
+          <label for="cedula">Cédula</label>
+          <input
+            type="text"
+            id="cedula"
+            [(ngModel)]="estudiante.cedula"
+            name="cedula"
+            required
+          />
+        </div>
+        <div>
+          <label for="nombres">Nombres</label>
+          <input
+            type="text"
+            id="nombres"
+            [(ngModel)]="estudiante.nombres"
+            name="nombres"
+            required
+          />
+        </div>
+        <div>
+          <label for="apellidos">Apellidos</label>
+          <input
+            type="text"
+            id="apellidos"
+            [(ngModel)]="estudiante.apellidos"
+            name="apellidos"
+            required
+          />
+        </div>
+        <div>
+          <label for="sexo">Sexo</label>
+          <select id="sexo" [(ngModel)]="estudiante.sexo" name="sexo" required>
+            <option value="M">Masculino</option>
+            <option value="F">Femenino</option>
+          </select>
+        </div>
+        <div>
+          <label for="fechaNacimiento">Fecha Nacimiento</label>
+          <input
+            type="date"
+            id="fechaNacimiento"
+            [(ngModel)]="estudiante.fechaNacimiento"
+            name="fechaNacimiento"
+            required
+          />
+        </div>
+        <div>
+          <label for="parcial1">Parcial 1</label>
+          <input
+            type="number"
+            id="parcial1"
+            [(ngModel)]="estudiante.parcial1"
+            name="parcial1"
+            required
+          />
+        </div>
+        <div>
+          <label for="parcial2">Parcial 2</label>
+          <input
+            type="number"
+            id="parcial2"
+            [(ngModel)]="estudiante.parcial2"
+            name="parcial2"
+            required
+          />
+        </div>
+        <div *ngIf="estudiante.estadoAprobatorio !== 'Aprobado' || estudiante.examenRecuperacion !== undefined">
+          <label for="examenRecuperacion">Nota Examen Recuperación</label>
+          <input
+            type="number"
+            id="examenRecuperacion"
+            [(ngModel)]="estudiante.examenRecuperacion"
+            name="examenRecuperacion"
+          />
+        </div>
+        <div class="button-group">
+          <button type="submit">Guardar</button>
+          <button type="button" (click)="close.emit()">Cancelar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

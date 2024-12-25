@@ -1,0 +1,62 @@
+<section>
+  <div class="container">
+    <h1>Gestión de Estudiantes</h1>
+    <input type="text" placeholder="Buscar por nombre o cédula" [(ngModel)]="searchTerm" (input)="filterEstudiantes()" />
+    <button (click)="isOpen = true; selectedEstudiante = null">Agregar Estudiante</button>
+    <table>
+      <thead>
+        <tr>
+          <th>Código</th>
+          <th>Cédula</th>
+          <th>Nombres</th>
+          <th>Apellidos</th>
+          <th>Fecha Nacimiento</th>
+          <th>Sexo</th> <!-- Nueva columna -->
+          <th>Parcial 1</th>
+          <th>Parcial 2</th>
+          <th>Calificación Final</th> <!-- Nueva columna -->
+          <th>Nota Examen Recuperación</th>
+          <th>Nota Definitiva</th> <!-- Renombrado -->
+          <th>Estado Aprobatorio</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let estudiante of filteredEstudiantes; let i = index">
+          <td>{{ estudiante.codigo }}</td>
+          <td>{{ estudiante.cedula }}</td>
+          <td>{{ estudiante.nombres }}</td>
+          <td>{{ estudiante.apellidos }}</td>
+          <td>{{ estudiante.fechaNacimiento }}</td>
+          <td>{{ estudiante.sexo }}</td> <!-- Nueva celda -->
+          <td>{{ estudiante.parcial1 }}</td>
+          <td>{{ estudiante.parcial2 }}</td>
+          <td>{{ estudiante.calcularNF() || 'N/A' }}</td> 
+          <td>{{ estudiante.examenRecuperacion !== undefined ? estudiante.examenRecuperacion : 'N/A' }}</td>
+          <td>{{ estudiante.notaDefinitiva || 'N/A' }}</td> 
+          <td>{{ estudiante.estadoAprobatorio || 'N/A' }}</td>
+          <td>
+            <div class="action-buttons">
+              <button (click)="editEstudiante(estudiante)" >Editar</button>
+              <button (click)="deleteEstudiante(i)">Eliminar</button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="statistics">
+      <h2>Estadísticas</h2>
+      <p>Porcentaje de Aprobados: {{ getPorcentajeAprobados() }}%</p>
+      <p>Porcentaje de Reprobados: {{ getPorcentajeReprobados() }}%</p>
+      <p>Porcentaje de Aprobados (Masculino): {{ getPorcentajeAprobadosPorSexo('M') }}%</p>
+      <p>Porcentaje de Aprobados (Femenino): {{ getPorcentajeAprobadosPorSexo('F') }}%</p>
+      <p>Promedio de Nota General: {{ getPromedioNotaGeneral() }}</p>
+      <p>Estudiante con Mayor Nota: {{ getEstudianteMayorNota()?.nombres }} {{ getEstudianteMayorNota()?.apellidos }} ({{ getEstudianteMayorNota()?.notaDefinitiva }})</p> <!-- Renombrado -->
+    </div>
+  </div>
+  <app-agregar
+    [isOpen]="isOpen"
+    [selectedEstudiante]="selectedEstudiante"
+    (close)="onCloseModal()">
+  </app-agregar>
+</section>
