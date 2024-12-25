@@ -29,11 +29,11 @@
           <td>{{ estudiante.apellidos }}</td>
           <td>{{ estudiante.fechaNacimiento }}</td>
           <td>{{ estudiante.sexo }}</td> <!-- Nueva celda -->
-          <td>{{ estudiante.parcial1 }}</td>
-          <td>{{ estudiante.parcial2 }}</td>
-          <td>{{ estudiante.calcularNF() || 'N/A' }}</td> 
-          <td>{{ estudiante.examenRecuperacion !== undefined ? estudiante.examenRecuperacion : 'N/A' }}</td>
-          <td>{{ estudiante.notaDefinitiva || 'N/A' }}</td> 
+          <td>{{ estudiante.parcial1 | number:'1.2-2' }}</td>
+          <td>{{ estudiante.parcial2 | number:'1.2-2' }}</td>
+          <td>{{ estudiante.calcularNF() | number:'1.2-2' || 'N/A' }}</td> 
+          <td>{{ estudiante.examenRecuperacion !== undefined ? (estudiante.examenRecuperacion | number:'1.2-2') : 'N/A' }}</td>
+          <td>{{ estudiante.notaDefinitiva | number:'1.2-2' || 'N/A' }}</td> 
           <td>{{ estudiante.estadoAprobatorio || 'N/A' }}</td>
           <td>
             <div class="action-buttons">
@@ -46,12 +46,12 @@
     </table>
     <div class="statistics">
       <h2>Estadísticas</h2>
-      <p>Porcentaje de Aprobados: {{ getPorcentajeAprobados() }}%</p>
-      <p>Porcentaje de Reprobados: {{ getPorcentajeReprobados() }}%</p>
-      <p>Porcentaje de Aprobados (Masculino): {{ getPorcentajeAprobadosPorSexo('M') }}%</p>
-      <p>Porcentaje de Aprobados (Femenino): {{ getPorcentajeAprobadosPorSexo('F') }}%</p>
-      <p>Promedio de Nota General: {{ getPromedioNotaGeneral() }}</p>
-      <p>Estudiante con Mayor Nota: {{ getEstudianteMayorNota()?.nombres }} {{ getEstudianteMayorNota()?.apellidos }} ({{ getEstudianteMayorNota()?.notaDefinitiva }})</p> <!-- Renombrado -->
+      <p>Porcentaje de Aprobados: {{ getPorcentajeAprobados() | number:'1.2-2' }}%</p>
+      <p>Porcentaje de Reprobados: {{ getPorcentajeReprobados() | number:'1.2-2' }}%</p>
+      <p>Porcentaje de Aprobados (Masculino): {{ getPorcentajeAprobadosPorSexo('M') | number:'1.2-2' }}%</p>
+      <p>Porcentaje de Aprobados (Femenino): {{ getPorcentajeAprobadosPorSexo('F') | number:'1.2-2' }}%</p>
+      <p>Promedio de Nota General: {{ getPromedioNotaGeneral() | number:'1.2-2' }}</p>
+      <p>Estudiante con Mayor Nota: {{ getEstudianteMayorNota()?.nombres }} {{ getEstudianteMayorNota()?.apellidos }} ({{ getEstudianteMayorNota()?.notaDefinitiva | number:'1.2-2' }})</p> <!-- Renombrado -->
     </div>
   </div>
   <app-agregar
